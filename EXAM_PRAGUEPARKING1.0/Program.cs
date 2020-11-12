@@ -24,16 +24,16 @@ namespace EXAM_PRAGUEPARKING1._0
             while (running == true)
             {
 
-                Console.WriteLine(UPwelcome);
+                Console.WriteLine("\n" + UPwelcome);
                 Console.WriteLine(DateTime.Now);
-                Console.WriteLine("____________________");
+                Console.WriteLine("______________________");
                 Console.WriteLine("\nWhat do you want to do?");
-                Console.WriteLine("1. CheckIn ");
-                Console.WriteLine("2. Move Vehicle ");
-                Console.WriteLine("3. CheckOut");
-                Console.WriteLine("4. Search Vehicle");
-                Console.WriteLine("5. Exit");
-                Console.WriteLine("6. Show Garage Map");
+                Console.WriteLine("1. CHECKIN ");
+                Console.WriteLine("2. MOVE VEHICLE ");
+                Console.WriteLine("3. CHECKOUT");
+                Console.WriteLine("4. SEARCH VEHICLE");
+                Console.WriteLine("5. EXIT");
+                Console.WriteLine("6. SHOW GARAGE MAP");
 
                 string option = Console.ReadLine();
 
@@ -41,10 +41,13 @@ namespace EXAM_PRAGUEPARKING1._0
                 {
                     case "1":
 
-                        /////////////////////////////VEHICLETYPE
+                        ///////////////////////////////////
+                        ////////////VEHICLE TYPE///////////
+                        ///////////////////////////////////
+                        Console.WriteLine("###### CHECKIN ######");
                         Console.WriteLine("Enter vehicle type: 1. CAR | 2. MC");
                         string vehicleType = Console.ReadLine();
-
+                        
 
 
                         switch (vehicleType)
@@ -63,10 +66,13 @@ namespace EXAM_PRAGUEPARKING1._0
 
                         }
 
-                        /////////////////////////REGNUMBER
+                        /////////////////////////
+                        ///////REGNUMBER/////////
+                        /////////////////////////
 
                         Console.WriteLine("Enter your registration number: ");
                         string registrationNr = Console.ReadLine();
+                        registrationNr = registrationNr.ToUpper();
 
                         if (registrationNr.Length > 10)
                         {
@@ -93,7 +99,9 @@ namespace EXAM_PRAGUEPARKING1._0
                             Console.WriteLine("Sorry, something is wrong.");
                         }
 
-                        //////////////////////////CHECK IN
+                        /////////////////////////////////
+                        /////////APPEND TO SPOT//////////
+                        /////////////////////////////////
 
                         string MC_FREE = " #MCFREESPOT";
 
@@ -149,29 +157,22 @@ namespace EXAM_PRAGUEPARKING1._0
                         }
 
 
-
-
-
-
-                        //////////GO HOME GARAGE, YOU'RE DRUNK
-
-
-
-
-
-
-
-
-
-
-
+                        
 
                         break;
 
                     case "2":
 
-                        /////////////////////////////////MOVE VEHICLE
+                        ///////////////////////////////
+                        //////////MOVE VEHICLE/////////
+                        ///////////////////////////////
 
+
+                        ///////////////////////////////
+                        /////////VEHICLE TYPE//////////
+                        ///////////////////////////////
+
+                        Console.WriteLine("###### MOVE VEHICLE ######");
                         Console.WriteLine("Enter vehicle type: 1. CAR | 2. MC");
                         string vehicleTypeMove = Console.ReadLine();
 
@@ -200,10 +201,9 @@ namespace EXAM_PRAGUEPARKING1._0
 
                         Console.WriteLine("Please enter the registration number for the vehicle you want to move: ");
                         string MoveVehicle = Console.ReadLine();
+                        MoveVehicle = MoveVehicle.ToUpper();
 
-
-                        //string MoveCar = "";
-                        //string MoveMC = "";
+                        
 
                         if (vehicleTypeMove == "#CAR")
                         {
@@ -222,6 +222,9 @@ namespace EXAM_PRAGUEPARKING1._0
 
 
 
+                        ////////////////////////////////////////////
+                        ///////////FIND VEHICLE & CLEAR/////////////
+                        ////////////////////////////////////////////
 
 
 
@@ -246,7 +249,7 @@ namespace EXAM_PRAGUEPARKING1._0
                         else if (ShiftSpace == true && vehicleTypeMove == "#MC" && parkingSpace[p].Contains(MC_FREE))
                         {
                             Console.WriteLine("Your vehicle is at spot {0}", p + 1);
-                            //string[] strikeout = parkingSpace[p].Split(MoveVehicle, StringSplitOptions.RemoveEmptyEntries);
+                            
                             parkingSpace[p] = "|EMPTY";
 
 
@@ -257,7 +260,7 @@ namespace EXAM_PRAGUEPARKING1._0
                         else if (ShiftSpace == true && vehicleTypeMove == "#MC" && !parkingSpace[p].Contains(MC_FREE))
                         {
                             Console.WriteLine("Your vehicle is at spot {0}", p + 1);
-                            //string[] strikeout = parkingSpace[p].Split(MoveVehicle, StringSplitOptions.RemoveEmptyEntries);
+                            
                             parkingSpace[p] = parkingSpace[p].Replace(MoveVehicle, MC_FREE);
 
 
@@ -269,7 +272,9 @@ namespace EXAM_PRAGUEPARKING1._0
 
 
 
-                        /////////////////////
+                        /////////////////////////////
+                        ////////MOVE NEW SPOT////////
+                        /////////////////////////////
 
                         Console.WriteLine("Where do you want to move your vehicle?");
                         int MoveVehicleNewPos = int.Parse(Console.ReadLine());
@@ -280,7 +285,7 @@ namespace EXAM_PRAGUEPARKING1._0
                         p = 0;
                         bool FREENEW = false;
 
-                        ////Någon typ av convertering? Vi behöver ju hitta den angivna CR i parkeringen och sen kolla om den är ledig, FREENEW=true;
+                        
 
 
                         for (p = 0; p < parkingSpace.Length; p++)
@@ -301,8 +306,11 @@ namespace EXAM_PRAGUEPARKING1._0
                         }
 
 
+                        ////////////////////////////////
+                        ///////////DOUBLE MC////////////
+                        ////////////////////////////////
 
-                        /////parkingSpace[MoveVehicleNewPos].Contains(MC_FREE) == true && vehicleTypeMove == "#MC"
+                        
                         else if (parkingSpace[MoveVehicleNewPos].Contains(MC_FREE) == true && vehicleTypeMove == "#MC")
                         {
 
@@ -324,7 +332,10 @@ namespace EXAM_PRAGUEPARKING1._0
 
                         }
 
-                        //////SINGLE MC TO EMPTY LOT
+                        /////////////////////////////////////////
+                        ////////SINGLE MC TO EMPTY LOT///////////
+                        /////////////////////////////////////////
+                        
                         else if (FREENEW == true && parkingSpace[MoveVehicleNewPos] == "|EMPTY" && vehicleTypeMove == "#MC")
 
                         {
@@ -343,13 +354,18 @@ namespace EXAM_PRAGUEPARKING1._0
                         break;
 
                     case "3":
-                        //////////////////////////////CHECKOUT
+
+                        ///////////////////////
+                        ////////CHECKOUT///////
+                        ///////////////////////
 
                         int i = 0;
                         bool vehicleFound = false;
 
+                        Console.WriteLine("###### CHECKOUT ######");
                         Console.WriteLine("Please enter the registration number for the vehicle you want to check out: ");
                         string SearchVehicle = Console.ReadLine();
+                        SearchVehicle = SearchVehicle.ToUpper();
 
                         for (i = 0; i < parkingSpace.Length; i++)
                         {
@@ -364,6 +380,7 @@ namespace EXAM_PRAGUEPARKING1._0
                         if (vehicleFound == true)
                         {
                             Console.WriteLine("Your vehicle is at spot: {0}", i + 1);
+                            Console.WriteLine("Your vehicle has been checked out.");
                             parkingSpace[i] = "|EMPTY";
 
                         }
@@ -381,12 +398,17 @@ namespace EXAM_PRAGUEPARKING1._0
 
                     case "4":
 
-                        /////////////////////////////SEARCH
+                        /////////////////////////////
+                        ///////////SEARCH////////////
+                        /////////////////////////////
+                        
                         i = 0;
                         vehicleFound = false;
 
+                        Console.WriteLine("###### SEARCH ######");
                         Console.WriteLine("Please enter the registration number for the vehicle you're looking for: ");
                         SearchVehicle = Console.ReadLine();
+                        SearchVehicle = SearchVehicle.ToUpper();
 
                         for (i = 0; i < parkingSpace.Length; i++)
                         {
@@ -412,13 +434,20 @@ namespace EXAM_PRAGUEPARKING1._0
                         break;
 
                     case "5":
-                        ///////////////////////////////PROGRAM IS RUNNING
+                        ////////////////////////////////////
+                        ///////PROGRAM IS RUNNING///////////
+                        ////////////////////////////////////
+                        
                         running = false;
                         break;
 
                     case "6":
 
-                        ////////////////////////////////GARAGE MAP
+                        ////////////////////////////////
+                        //////////GARAGE MAP////////////
+                        ////////////////////////////////
+                        
+                        Console.WriteLine("###### GARAGE MAP ######");
                         for (i = 0; i < parkingSpace.Length; i++)
                         {
                             Console.WriteLine(i + 1 + ". " + parkingSpace[i]);
@@ -433,5 +462,7 @@ namespace EXAM_PRAGUEPARKING1._0
 
                 }
             }
+        }
     }
+
 }
